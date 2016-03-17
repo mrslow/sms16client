@@ -1,0 +1,36 @@
+files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.old
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+.Python
+.venv/
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+#User's definitions
+*.log*
+*.yml
