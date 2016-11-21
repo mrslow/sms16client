@@ -3,20 +3,22 @@
 import requests
 import md5
 from exception import ApiException
+from utils import find
 
-BASE_URL = "https://new.sms16.ru/get"
 
 class Client(object):
 
+    BASE_URL = "https://new.sms16.ru/get"
 
-    def __init__(self, login='', api_key=''):
+    def __init__(self, login=None, api_key=None, sender=None):
         """
         Initialize with default vars. After initializing need to assign
-        `login` and `api_key`. See https://new.sms16.ru/api/
+        `login`,`api_key` and `sender`. See https://new.sms16.ru/api/
         """
 
         self.login = login
         self.api_key = api_key
+        self.sender = sender
 
     @property
     def timestamp(self):
@@ -25,7 +27,7 @@ class Client(object):
         :return: string
         """
 
-        url = "{0}/{1}".format(BASE_URL, "timestamp.php")
+        url = "{0}/{1}".format(self.BASE_URL, "timestamp.php")
         r = requests.get(url)
         return r.text
 
@@ -51,7 +53,7 @@ class Client(object):
         :return: dict
         """
 
-        url = "{0}/{1}".format(BASE_URL, endpoint)
+        url = "{0}/{1}".format(self.BASE_URL, endpoint)
         params = {"login": self.login,
                   "timestamp": self.timestamp,
                   "return": "json"
@@ -60,20 +62,23 @@ class Client(object):
         signature = self.get_signature(params)
         params["signature"] = signature
         r = requests.get(url, params=params)
-        return r.json()
+        response = r.json()
+        error_code = find("error", response)
+        if error_code:
+            raise ApiException(error_code)
+        return response
 
 
-    def send(self, sender, receivers, text):
+    def send(self, receivers, text):
         """
         Sending sms message.
-        :param sender: name of sender
         :param receivers: list of receiver's telephone numbers
         :param text: text message
         :return: dict
         """
 
         endpoint = "send.php"
-        params = {"sender": sender,
+        params = {"sender": self.sender,
                   "phone": ','.join(receivers),
                   "text": text
                   }

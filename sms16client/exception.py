@@ -32,7 +32,7 @@ ERRORS = {
         "27": u"There are no valid phone numbers",
         "28": u"Initial date is not specified",
         "29": u"Final date is not specified",
-        "30": u"Date not specified (format: YYYY-MM-DD)"
+        "30": u"Date not specified (format: YYYY-MM-DD)",
 }
 
 
@@ -45,10 +45,11 @@ class ApiException(SMS16Exception):
     """
 
     def __init__(self, code):
-        try:
-            message = ERRORS[code]
-        except KeyError:
-            message = "Error code `{}` is not found".format(code)
+        default_message = u"Error code `{}` is not found"
+        if code.isdigit():
+            message = ERRORS.get(str(code), default_message.format(code))
+        else:
+            message = default_message.format(code)
         self.code = code
         self.json = {"code": code, "message": message}
 
