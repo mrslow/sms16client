@@ -63,9 +63,9 @@ class Client(object):
         params["signature"] = signature
         r = requests.get(url, params=params)
         response = r.json()
-        error_code = find("error", response)
-        if error_code:
-            raise ApiException(error_code)
+        error = find("error", response)
+        if error:
+            raise ApiException(error)
         return response
 
 
