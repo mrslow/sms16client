@@ -1,7 +1,5 @@
-# coding: utf-8
-
 import requests
-import md5
+from hashlib import md5
 from exception import ApiException
 from utils import find
 

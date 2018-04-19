@@ -1,38 +1,36 @@
-# coding: utf-8
-
 ERRORS = {
-        0: u"Service is unavailable",
-        1: u"Signature is missing",
-        2: u"Login is missing",
-        3: u"Text is missing",
-        4: u"Unknown phone number",
-        5: u"Unknown sender",
-        6: u"Invalid signature",
-        7: u"Invalid login",
-        8: u"Invalid sender's name",
-        9: u"Unknown name of the sender",
-        10: u"Sender's name is not approved",
-        11: u"The text contains forbidden words",
-        12: u"Error sending sms",
-        13: u"Phone number located in the stop list. Sending to this number \
+        0: "Service is unavailable",
+        1: "Signature is missing",
+        2: "Login is missing",
+        3: "Text is missing",
+        4: "Unknown phone number",
+        5: "Unknown sender",
+        6: "Invalid signature",
+        7: "Invalid login",
+        8: "Invalid sender's name",
+        9: "Unknown name of the sender",
+        10: "Sender's name is not approved",
+        11: "The text contains forbidden words",
+        12: "Error sending sms",
+        13: "Phone number located in the stop list. Sending to this number \
                 is blocked",
-        14: u"There are of more than 50 phone numbers in the request",
-        15: u"Database is not specified",
-        16: u"Invalid phone number",
-        17: u"SMS ID are not specified",
-        18: u"Status is not received",
-        19: u"Empty response",
-        20: u"Phone number already exists",
-        21: u"No name",
-        22: u"Template already exists",
-        23: u"Unknown month (format: YYYY-MM)",
-        24: u"Timestamp is not specified",
-        25: u"Error accessing database",
-        26: u"Database is empty",
-        27: u"There are no valid phone numbers",
-        28: u"Initial date is not specified",
-        29: u"Final date is not specified",
-        30: u"Date not specified (format: YYYY-MM-DD)",
+        14: "There are of more than 50 phone numbers in the request",
+        15: "Database is not specified",
+        16: "Invalid phone number",
+        17: "SMS ID are not specified",
+        18: "Status is not received",
+        19: "Empty response",
+        20: "Phone number already exists",
+        21: "No name",
+        22: "Template already exists",
+        23: "Unknown month (format: YYYY-MM)",
+        24: "Timestamp is not specified",
+        25: "Error accessing database",
+        26: "Database is empty",
+        27: "There are no valid phone numbers",
+        28: "Initial date is not specified",
+        29: "Final date is not specified",
+        30: "Date not specified (format: YYYY-MM-DD)",
 }
 
 
@@ -45,7 +43,7 @@ class ApiException(SMS16Exception):
     """
 
     def __init__(self, code):
-        default_message = u"Error code `{}` is not found"
+        default_message = "Error code `{}` is not found"
         if isinstance(code, int):
             message = ERRORS.get(code, default_message.format(code))
         else:
