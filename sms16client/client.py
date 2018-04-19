@@ -40,7 +40,7 @@ class Client(object):
         for key in sorted(params):
             string += params[key]
         string += self.api_key
-        m = md5.new(string.encode("utf-8"))
+        m = md5(string.encode("utf-8"))
         return m.hexdigest()
 
     def request(self, endpoint, extra_params={}):
