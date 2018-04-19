@@ -1,7 +1,7 @@
 import requests
 from hashlib import md5
-from exception import ApiException
-from utils import find
+from .exception import ApiException
+from .utils import find
 
 
 class Client(object):
