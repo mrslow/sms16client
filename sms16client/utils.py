@@ -1,5 +1,5 @@
 from nested_lookup import nested_lookup
 
-def find(key, value):
-    error = nested_lookup(key, value)
-    return error[0] if error and error[0] != "0" else None
+def find(key, source):
+    value = nested_lookup(key, source)
+    return value[0] if value and value[0] != "0" else None

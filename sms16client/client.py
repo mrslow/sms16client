@@ -27,6 +27,8 @@ class Client(object):
 
         url = "{0}/{1}".format(self.BASE_URL, "timestamp.php")
         r = requests.get(url)
+        if r.status_code >= 500:
+            raise ApiException(code=0)
         return r.text
 
     def get_signature(self, params):
@@ -60,6 +62,8 @@ class Client(object):
         signature = self.get_signature(params)
         params["signature"] = signature
         r = requests.get(url, params=params)
+        if r.status_code >= 500:
+            raise ApiException(code=0)
         response = r.json()
         error = find("error", response)
         if error:
